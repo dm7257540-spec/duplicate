@@ -22,6 +22,8 @@ set "new_filename=!random_name!.bat"
 :: Duplicate this file to the new random name
 copy "%~f0" "!new_filename!" >nul
 
+pause
+
 :: Run the newly duplicated batch file
 start "" "!new_filename!"
 

